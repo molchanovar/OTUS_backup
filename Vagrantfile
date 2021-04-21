@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
       v.memory = 512
       v.cpus = 1
     end
-	cborg.vm.hostname = "client"
+    cborg.vm.hostname = "client"
   end
 
   config.vm.define "borgserver" do |sborg|
@@ -19,19 +19,13 @@ Vagrant.configure(2) do |config|
     sborg.vm.provider "virtualbox" do |v|
       v.memory = 512
       v.cpus = 1
-	  #v.customize ["modifyvm", :id, "--memory", "1024"]
-
-	  # New disk for /var/backup directory  - 5 GB
-	  new_disk = 'newdisk.vdi'
-	  v.customize ['createhd', '--filename', new_disk, '--size', 5 * 1024]
-	  v.customize ["storagectl", :id, "--name", "SATA", "--add", "sata" ]
-	  v.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', new_disk]
+      # New disk for /var/backup directory  - 5 GB
+      new_disk = 'newdisk.vdi'
+      v.customize ['createhd', '--filename', new_disk, '--size', 5 * 1024]
+      v.customize ["storagectl", :id, "--name", "SATA", "--add", "sata" ]
+      v.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', new_disk]
     end
-	sborg.vm.hostname = "server"
-	sborg.vm.provision "shell", path: "script.sh"
+    sborg.vm.hostname = "server"
+    sborg.vm.provision "shell", path: "script.sh"
   end
-  
- # config.vm.provision "ELK", type:'ansible' do |ansible|
- #   ansible.inventory_path = './inventories/all.yml'
- #   ansible.playbook = './logging.yml'
-  end
+end
