@@ -1,0 +1,131 @@
+Client:
+[root@borgclient ~]# history 
+    1  systemctl restart nginx
+    2  systemctl statusnginx
+    3  systemctl status nginx
+    4  vim /etc/nginx/nginx.conf
+    5  vim /etc/nginx/nginx.conf
+    6  systemctl restart nginx
+    7  systemctl status nginx
+    8  vim /etc/nginx/nginx.conf
+    9  systemctl restart nginx
+   10  systemctl status nginx
+   11  exit
+   12  systemctl status nginx
+   13  vim /vagrant/web/nginx.conf
+   14  systemctl restart nginx
+   15  rm -rf  /vagrant/*
+   16  ls /vagrant/
+   17  exit
+   18  uname -r
+   19  cat /etc/centos-release
+   20  yum install epel-release -y
+   21  htop
+   22  top
+   23  yum update -y
+   24  sudo yum install epel-release -y
+   25  yum install borgbackup -y
+   26  sudo useradd -m borg
+   27  su borg
+   28  hostnamectl set-hostname borgclient
+   29  su borg
+   30  cd /home/bors
+   31  cd /home/borg/
+   32  ls
+   33  ls -la
+   34  cd .ssh/
+   35  ls
+   36  vim id_rsa
+   37  vim id_rsa.pub 
+   38  ls -la
+   39  cd 
+   40  vim /etc/hosts
+   41  vim /etc/hosts
+   42  ping borgserver
+   43  ip a
+   44  shutdown -r
+   45  ssh borg@borgserver
+   46  ssh borg@borgserver
+   47  su borg
+   48  crontab -e
+   49  yum install cron 
+   50  yum install crond 
+   51  cd ../borg/
+   52  l
+   53  ls
+   54  vim backup_script.sh 
+   55  ./backup_script.sh 
+   56  borg list
+   57  borg list borgserver:/var/backup/otus
+   58  su borg
+   59  cd /etc
+   60  ls
+   61  ls /home/borg/
+   62  ./home/borg/backup_script.sh
+   63  /home/borg/backup_script.sh
+   64  vim crontab 
+   65  vim crontab 
+   66  rm anacrontab 
+   67  su borg
+   68  ll | grep ana
+   69  su borg
+   70  cd 
+   71  borg extract borg@borgserver:/var/backup/otus::etc_otus-2021-04-20@21:22 etc/anacrontab
+   72  borg extract borg@borgserver:/var/backup/otus::etc_otus-2021-04-20@21:22 etc/anacrontab
+   73  su borg
+   74  ls
+   75  cd /home/borg
+   76  ls
+   77  cd etc
+   78  ls
+   79  cp anacrontab /etc/
+   80  cd /etc
+   81  ls | grep ana
+   82  cd 
+   83  history 
+
+
+Server:
+[root@borgserver vagrant]# history 
+    1  vim /etc/ssh/sshd_config 
+    2  systemctl restart sshd
+    3  exir
+    4  exit
+    5  yum install epel-release -y
+    6  yum update
+    7  sudo yum install epel-release -y
+    8  yum install borgbackup -y
+    9  useradd --help
+   10  sudo useradd -m borg
+   11  su borg
+   12  hostnamectl set-hostname borgclient
+   13  su borg
+   14  hostnamectl set-hostname borgserver
+   15  su borg
+   16  vim /etc/host
+   17  vim /etc/hosts
+   18  ping borgclient
+   19  shutdown -r
+   20  ipa
+   21  ip a
+   22  su borg
+   23  mkdir /var/backup
+   24  ls /var
+   25  chmod 700 /var/backup/
+   26  ls -la /var
+   27  chown borg:borg /var/backup/
+   28  ls -la /var
+   29  export BORG_RSH='ssh -i /home/borg/.ssh/id_rsa'
+   30  export BORG_PASSPHRASE="otus"
+   31  cd /home/borg/.ssh/
+   32  ls
+   33  exit
+   34  printenv
+   35  printenv | grep BORG
+   36  su borg
+   37  yum install tree
+   38  su borg
+   39  cd 
+   40  lsblk
+   41  shutdown now
+   42  history 
