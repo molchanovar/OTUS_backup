@@ -26,6 +26,6 @@ Vagrant.configure(2) do |config|
       v.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', new_disk]
     end
     sborg.vm.hostname = "server"
-    sborg.vm.provision "shell", path: "script.sh"
+    sborg.vm.provision "shell", path: "server_script.sh"
   end
 end
