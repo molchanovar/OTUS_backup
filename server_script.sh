@@ -14,7 +14,7 @@ sudo yum -y install epel-release
 sudo yum -y install borgbackup
 sudo useradd -m borg
 mkdir /home/borg/.ssh
-sudo chmod 0700 /home/borg/.ssh/
 cp /vagrant/authorized_keys /home/borg/.ssh
+sudo chmod 0700 /home/borg/.ssh/
 sudo chown borg:borg -R /home/borg
 sudo chmod 0600 /home/borg/.ssh/authorized_keys
