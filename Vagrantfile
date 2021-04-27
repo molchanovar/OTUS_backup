@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
       v.cpus = 1
     end
     cborg.vm.hostname = "client"
+    cborg.vm.provision "shell", path: "client_script.sh"
   end
 
   config.vm.define "borgserver" do |sborg|
