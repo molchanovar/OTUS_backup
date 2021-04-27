@@ -3,6 +3,7 @@
 sudo yum -y install epel-release
 sudo yum -y install borgbackup
 sudo useradd -m borg
+cp /vagrant/hosts /etc/
 cp /vagrant/id_rsa /home/borg/.ssh
 cp /vagrant/id_rsa.pub /home/borg/.ssh
 sudo mkdir /var/backup
