@@ -12,6 +12,7 @@ cat /etc/mtab | grep /dev/sdb >> /etc/fstab
 # Borg install and adjust
 sudo yum -y install epel-release
 sudo yum -y install borgbackup
+sudo yum -y install vim
 sudo useradd -m borg
 mkdir /home/borg/.ssh
 sudo chmod 0700 /home/borg/.ssh/
