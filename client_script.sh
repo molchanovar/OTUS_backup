@@ -2,6 +2,7 @@
 
 sudo yum -y install epel-release
 sudo yum -y install borgbackup
+sudo yum -y install vim
 sudo useradd -m borg
 cp /vagrant/hosts /etc/
 cp /vagrant/id_rsa /home/borg/.ssh
