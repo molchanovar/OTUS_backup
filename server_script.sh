@@ -16,7 +16,7 @@ sudo yum -y install vim
 sudo useradd -m borg
 mkdir /home/borg/.ssh
 sudo chmod 0700 /home/borg/.ssh/
-cp /vagrant/authorized_keys /home/borg/.ssh
+cp /vagrant/authorized_keys /home/borg/.ssh/
 cp /vagrant/hosts /etc/
 sudo chown borg:borg -R /home/borg
 sudo chmod 0600 /home/borg/.ssh/authorized_keys
