@@ -17,17 +17,27 @@ backup_lab
 
 ### Выполнение: 
 Развернуты две ВМ - `client 10.0.1.4` и `server 10.0.1.5`
-На обоих серверах установлен borg и создан пользователь `borg`.
+
+
+На обоих серверах установлен borg и создан пользователь **borg**
+
+
 `useradd -m borg`
 
 На клиенте сгенерирован ssh-ключ:
 `ssh-keygen`
 
 Копируем публичный ключ на сервер для пользователя `borg`.
-Далее иницализируем репо на backupserver с client
-borg init --encryption=repokey borg@192.168.11.101:/var/backup
-Используем пароль admin, так в дальнейшем он будет использоваться в скрипте
-Далее запускаем бэкап:
+
+
+Иницализируем бэкап репозиторий на server с client:
+```
+borg init --encryption=repokey borg@server:/var/backup/borg
+```
+
+Пароль - `borg`. Его же определяем в переменной окружения для использования в скрипте `BackupScript.sh`.
+
+Запускаем бэкап:
 borg create --stats --list borg@192.168.11.101:/var/backup/::"MyBackup-{now:%Y-%m-%d_%H:%M:%S}" /etc
 Теперь проверяем репо с backupserver:
 borg list /var/backup
