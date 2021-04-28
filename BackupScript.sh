@@ -1,17 +1,17 @@
 #! /bin/bash
 
-#Задаем переменную окружения Borg
+# Environment variables for borgbackup
 export BORG_PASSPHRASE="borg"
 REPOSITORY="borg@server:/var/backup/borg"
 
-# Бэкап каталога /etc.
+# Backup /etc
 echo "Copy files to server"
 borg create -v --stats $REPOSITORY::'Backup-{now:%Y-%m-%d@%H:%M}' /etc
 
-# По ТЗ - глубина бекапа год, храним по последней копии на конец месяца, кроме последних трех. Последние три месяца содержат копии на каждый день.
+# Deep 1 year, one copy in one month (without last three). The last three backups include everyday copies. 
 echo "Clean old files" 
 borg prune -v $REPOSITORY --prefix 'Backup-' --list --keep-daily=90 --keep-monthly=9 --keep-yearly 1
 
-#Вывод информации о содержимом репозитория
+# Output info about backup
 echo "Backups list"
 borg list $REPOSITORY
