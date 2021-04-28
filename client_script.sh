@@ -16,4 +16,4 @@ export BORG_PASSPHRASE="borg"
 borg init --encryption=repokey borg@server:/var/backup/borg
 cp /vagrant/BackupScript.sh /opt
 sudo chmod +x /opt/BackupScript.sh
-echo "*/5 * * * * /opt/BackupScript.sh > /dev/null 2>&1" >> /etc/crontab
+echo "*/5 * * * * sudo runuser -l borg -c /opt/BackupScript.sh > /dev/null 2>&1" >> /etc/crontab
