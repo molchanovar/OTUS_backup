@@ -16,8 +16,20 @@ backup_lab
 
 
 ### Выполнение: 
-`script.sh` - скрипт создание диска и точки монтирования `/var/backup`
+Развернуты две ВМ - `client 10.0.1.4` и `server 10.0.1.5`
+На обоих серверах установлен borg и создан пользователь `borg`.
+`useradd -m borg`
 
-1. Установка borg на клиенте и сервере: 
+На клиенте сгенерирован ssh-ключ:
+`ssh-keygen`
+
+Копируем публичный ключ на сервер для пользователя `borg`.
+Далее иницализируем репо на backupserver с client
+borg init --encryption=repokey borg@192.168.11.101:/var/backup
+Используем пароль admin, так в дальнейшем он будет использоваться в скрипте
+Далее запускаем бэкап:
+borg create --stats --list borg@192.168.11.101:/var/backup/::"MyBackup-{now:%Y-%m-%d_%H:%M:%S}" /etc
+Теперь проверяем репо с backupserver:
+borg list /var/backup
 
 
