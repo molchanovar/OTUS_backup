@@ -5,6 +5,7 @@ sudo yum -y install borgbackup
 sudo yum -y install vim
 sudo useradd -m borg
 cp /vagrant/hosts /etc/
+sudo mkdir /home/borg/.ssh
 sudo cp /vagrant/id_rsa /home/borg/.ssh/
 sudo cp /vagrant/id_rsa.pub /home/borg/.ssh/
 # sudo mkdir /var/backup
