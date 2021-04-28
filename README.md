@@ -54,14 +54,47 @@ backup_lab
 
 Иницализируем бэкап репозиторий на server с client:
 ```
-borg init --encryption=repokey borg@server:/var/backup/borg
+[borg@client .ssh]$ borg init --encryption=repokey borg@server:/var/backup/borg
+
 ```
 
 Пароль - `borg`. Его же определяем в переменной окружения для использования в скрипте `BackupScript.sh`.
 
 Запускаем бэкап:
-borg create --stats --list borg@192.168.11.101:/var/backup/::"MyBackup-{now:%Y-%m-%d_%H:%M:%S}" /etc
-Теперь проверяем репо с backupserver:
+```
+[borg@client .ssh]$ borg create -v --stats borg@server:/var/backup/borg::'Backup-{now:%Y-%m-%d@%H:%M}' /etc
+
+------------------------------------------------------------------------------
+Archive name: Backup-2021-04-28@23:03
+Archive fingerprint: 0da696da0c4303fa40cf0a22ac80329027f54b03c61d3466a91fbe54d4566807
+Time (start): Wed, 2021-04-28 23:03:17
+Time (end):   Wed, 2021-04-28 23:03:18
+Duration: 1.03 seconds
+Number of files: 359
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:               21.00 MB              8.03 MB              8.02 MB
+All archives:               21.00 MB              8.03 MB              8.02 MB
+
+                       Unique chunks         Total chunks
+Chunk index:                     352                  360
+------------------------------------------------------------------------------
+
+```
+
+Проверим бэкапы на сервере:
+```
 borg list /var/backup
 
+[borg@server vagrant]$ borg list /var/backup/borg/
+Enter passphrase for key /var/backup/borg: 
+Backup-2021-04-28@23:03              Wed, 2021-04-28 23:03:17 [0da696da0c4303fa40cf0a22ac80329027f54b03c61d3466a91fbe54d4566807]
+```
 
+Бэкап выполнен. Далее добавляем задачу в `cron` (Выполнение от пользователя `borg`): 
+```
+*/5 * * * * runuser -l borg -c /opt/BackupScript.sh > /dev/null 2>&1
+```
+
+Проверим что бэкапы работают, удалим на клиента файл /etc/
