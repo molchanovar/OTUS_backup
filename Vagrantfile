@@ -4,17 +4,6 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "centos/8"
 
-
-  config.vm.define "borgclient" do |cborg|
-    cborg.vm.network "private_network", ip: "10.0.1.4", virtualbox__intnet: "net1"
-    cborg.vm.provider "virtualbox" do |v|
-      v.memory = 512
-      v.cpus = 1
-    end
-    cborg.vm.hostname = "client"
-    cborg.vm.provision "shell", path: "client_script.sh"
-  end
-
   config.vm.define "borgserver" do |sborg|
     sborg.vm.network "private_network", ip: "10.0.1.5", virtualbox__intnet: "net1"
     sborg.vm.provider "virtualbox" do |v|
@@ -28,5 +17,15 @@ Vagrant.configure(2) do |config|
     end
     sborg.vm.hostname = "server"
     sborg.vm.provision "shell", path: "server_script.sh"
+  end
+  
+  config.vm.define "borgclient" do |cborg|
+    cborg.vm.network "private_network", ip: "10.0.1.4", virtualbox__intnet: "net1"
+    cborg.vm.provider "virtualbox" do |v|
+      v.memory = 512
+      v.cpus = 1
+    end
+    cborg.vm.hostname = "client"
+    cborg.vm.provision "shell", path: "client_script.sh"
   end
 end
