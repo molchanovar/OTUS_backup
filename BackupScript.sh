@@ -2,7 +2,7 @@
 
 #Задаем переменную окружения Borg
 export BORG_PASSPHRASE="borg"
-REPOSITORY="borg@borgserver:/var/backup/borg"
+REPOSITORY="borg@server:/var/backup/borg"
 
 # Бэкап каталога /etc.
 echo "Copy files to server"
